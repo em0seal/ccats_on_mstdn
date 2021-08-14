@@ -41,7 +41,7 @@ def plot_and_save_chart(save_filename, list_indicators, fdate=None, tdate=None):
     plt.savefig(save_filename, dpi=350)
 
 
-def caliculate_and_plot_data(btc_data_filename, from_date: str, to_date: str):
+def caliculate_and_plot_data(btc_data_filename, save_filename, from_date: str, to_date: str):
 
     list_indicators = []
     if from_date:
@@ -68,4 +68,4 @@ def caliculate_and_plot_data(btc_data_filename, from_date: str, to_date: str):
     list_indicators.append(ema_long_indicator)
     list_indicators.append(raw_indicator)
 
-    plot_and_save_chart(list_indicators=list_indicators, fdate=from_date, tdate=to_date)
+    plot_and_save_chart(save_filename, list_indicators=list_indicators, fdate=from_date, tdate=to_date)
