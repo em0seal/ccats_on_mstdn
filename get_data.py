@@ -1,11 +1,7 @@
 import datetime
-
 import requests
+
 import pandas as pd
-
-
-FILE_NAME = 'btc2usd'
-SUFFIX = 'csv'          # html, json
 
 
 # Return DataFrame of Bitcoin historical data
@@ -39,7 +35,6 @@ def save_df(df, file_name, suffix):
         df.to_json(file_name)
 
 
-if __name__ == '__main__':
+def get_data(save_filename, suffix):
     df_btc2usd = get_crypto_hist_from_cryptocompare()
-    print(df_btc2usd)
-    save_df(df_btc2usd, FILE_NAME, SUFFIX)
+    save_df(df_btc2usd, save_filename, suffix)
