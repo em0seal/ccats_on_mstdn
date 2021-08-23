@@ -3,6 +3,8 @@ import datetime
 import os
 import pytz
 
+import pandas
+
 from chart import caliculate_and_plot_data
 from get_data import get_data
 from mastodon import publish_status_with_media
@@ -34,7 +36,10 @@ if __name__ == "__main__":
                              to_date=date_today)
     print(f"[Finished generating png] -> {img_file}")
 
+    df_btc = pandas.read_csv(btc_datafile)
+    btc_price_today = df_btc["close"].tail(1).item()
+
     # publish the image to mastodon
-    status = f"[bot] Bitcoin Chart Today\n(=^･ω･^=)<Have a good one!\n\n{datetime.datetime.now()}"
+    status = f"[bot] Bitcoin Chart Today\nTIMESTAMP: {datetime.datetime.now()}\nBTCPRICE: {btc_price_today} USD/BTC\n\n(=^･ω･^=)<Have a good one!\n"
     publish_status_with_media(access_token=os.environ[token_env], status=status, filename=img_file)
     print("[Finished publising the image to Mastodon]")
